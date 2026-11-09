@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Electric Fault Detection System | NMIET</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:#020b1c;color:#fff;line-height:1.6}
+nav{position:sticky;top:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;padding:14px 6%;background:rgba(1,10,28,.97);border-bottom:1px solid #00bfff;box-shadow:0 0 20px rgba(0,170,255,.12)}
+.logo{font-size:18px;font-weight:bold}.logo span{color:#00d9ff}
+nav ul{display:flex;list-style:none;gap:22px}nav ul li a{color:#fff;text-decoration:none;font-size:14px}nav ul li a:hover{color:#00d9ff}
+.hero{min-height:90vh;display:flex;align-items:center;padding:70px 7%;position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(2,11,28,.98),rgba(2,28,65,.70)),radial-gradient(circle at 80% 40%,#0066aa,transparent 45%)}
+.hero:before{content:"";position:absolute;width:600px;height:600px;border:2px solid rgba(0,200,255,.12);border-radius:50%;right:-250px;top:-180px}
+.hero-content{max-width:950px;position:relative;z-index:2}.college{color:#d9f3ff;font-size:15px;font-weight:bold;letter-spacing:1px;margin-bottom:8px}.department{color:#00d9ff;font-size:14px;margin-bottom:30px}.tag{color:#00d9ff;font-size:17px;font-weight:bold;letter-spacing:3px;margin-bottom:18px}
+h1{font-size:clamp(42px,7vw,78px);line-height:.98;text-transform:uppercase}h1 span{color:#ffc928;text-shadow:0 0 20px rgba(255,201,40,.25)}
+.subtitle{margin-top:25px;color:#d8ecfa;font-size:19px;max-width:760px}.btn{display:inline-block;margin-top:30px;padding:13px 28px;border-radius:30px;background:linear-gradient(90deg,#0077ff,#00d9ff);color:#fff;text-decoration:none;font-weight:bold;box-shadow:0 0 25px rgba(0,180,255,.3)}
+section{padding:75px 7%}.section-title{font-size:36px;margin-bottom:35px}.section-title span{color:#00d9ff}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:25px}.card{background:linear-gradient(145deg,#071b38,#041126);border:1px solid #087cc5;border-radius:18px;padding:30px;box-shadow:0 0 25px rgba(0,130,255,.08)}.card h3{color:#00d9ff;font-size:24px;margin-bottom:15px}.card p{color:#d2e4f2;line-height:1.8}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.feature{background:#06162e;border:1px solid #087cc5;border-radius:16px;padding:28px;transition:.3s}.feature:hover{transform:translateY(-5px);box-shadow:0 0 25px rgba(0,180,255,.18)}.icon{font-size:35px;margin-bottom:12px}.feature h3{color:#00d9ff;margin-bottom:10px}.feature p{color:#c8dcea}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.step{background:#06162e;border:1px solid #087cc5;border-radius:16px;padding:25px}.step-number{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0077ff,#00d9ff);font-weight:bold;margin-bottom:15px}.step h3{color:#00d9ff;margin-bottom:10px}.step p{color:#c9ddea}
+.circuit{text-align:center}.circuit-box{background:#06162e;border:1px solid #008cff;border-radius:20px;padding:25px;box-shadow:0 0 35px rgba(0,160,255,.12)}.circuit-box img{width:100%;max-width:1150px;display:block;margin:auto;border-radius:12px;background:#fff}.diagram-note{margin-top:20px;color:#bcd4e8}
+.prototype-box{display:grid;grid-template-columns:1.2fr .8fr;gap:35px;align-items:center;background:linear-gradient(145deg,#071b38,#041126);border:1px solid #00aaff;border-radius:20px;padding:30px;box-shadow:0 0 35px rgba(0,160,255,.12)}.prototype-image{border-radius:15px;overflow:hidden;border:2px solid #087cc5;background:#020b1c}.prototype-image img{width:100%;display:block}.prototype-info h3{color:#00d9ff;font-size:28px;margin-bottom:15px}.prototype-info p{color:#d2e4f2;line-height:1.8}.prototype-points{margin-top:20px;display:grid;gap:10px}.prototype-points div{background:#061b36;border-left:3px solid #00d9ff;padding:11px 15px;border-radius:8px;color:#e5f4ff}
+.faults{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.fault{padding:30px;border-radius:18px;text-align:center}.over{background:linear-gradient(145deg,#4b2500,#251400);border:1px solid #ffb300}.low{background:linear-gradient(145deg,#00365a,#021a2b);border:1px solid #00aaff}.current{background:linear-gradient(145deg,#4b0710,#240307);border:1px solid #ff3d4d}.fault h3{font-size:22px;margin-bottom:10px}.fault p{color:#dbe9f5}
+.table-container{overflow-x:auto}table{width:100%;min-width:600px;border-collapse:collapse;background:#06162e}th,td{padding:14px;border:1px solid #14649a;text-align:left}th{background:#073b6b;color:#00d9ff}td{color:#dcecf7}tr:hover td{background:#08203d}
+.applications{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.application{padding:30px;border-radius:18px;background:linear-gradient(145deg,#061b36,#031025);border:1px solid #087cc5}.application h3{color:#00d9ff;margin-bottom:12px}.application p{color:#c8ddea}
+.team-section{background:linear-gradient(180deg,#020b1c,#04152d)}.team-container{max-width:1150px;margin:auto}.team-title{text-align:center;color:#00d9ff;font-size:28px;margin-bottom:25px}.members{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}.member{background:linear-gradient(145deg,#071b38,#041126);border:1px solid #087cc5;border-radius:15px;padding:22px 10px;text-align:center;transition:.3s}.member:hover{transform:translateY(-5px);border-color:#00d9ff;box-shadow:0 0 25px rgba(0,180,255,.2)}.member-icon{width:52px;height:52px;margin:auto auto 12px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0077ff,#00d9ff);font-size:22px}.member h4{color:#fff;font-size:15px}.member .role{display:block;color:#00d9ff;font-size:12px;font-weight:bold;margin:8px 0 6px;letter-spacing:.5px}.member p{color:#c8dcea;font-size:13px;line-height:1.55}
+.guide{margin-top:35px;max-width:650px;margin-left:auto;margin-right:auto;text-align:center;background:linear-gradient(145deg,#0a2346,#041126);border:1px solid #ffc928;border-radius:18px;padding:28px;box-shadow:0 0 25px rgba(255,201,40,.08)}.guide-label{color:#ffc928;font-size:14px;letter-spacing:2px;font-weight:bold;margin-bottom:8px}.guide h3{color:#fff;font-size:24px}
+.college-info{text-align:center;padding:35px 20px;background:#010817;border-top:1px solid #075a91}.college-info h3{color:#00d9ff;font-size:21px}.college-info p{color:#b9d0df;margin-top:6px}.college-info .branch{color:#ffc928;font-weight:bold}
+footer{padding:30px 7%;text-align:center;background:#010817}footer p{color:#9fb8cc;margin:6px 0}.highlight{color:#ffc928}
+@media(max-width:900px){nav ul{display:none}.hero{min-height:80vh;padding:55px 6%}h1{font-size:44px}.about,.features,.steps,.faults,.applications,.prototype-box{grid-template-columns:1fr}.members{grid-template-columns:repeat(2,1fr)}section{padding:55px 5%}.section-title{font-size:30px}.prototype-info h3{font-size:23px}}
+@media(max-width:450px){.members{grid-template-columns:1fr}h1{font-size:37px}.college{font-size:13px}}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="logo">⚡ Smart Electric <span>Fault Detection</span></div>
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#working">Working</a></li>
+<li><a href="#circuit">Circuit</a></li>
+<li><a href="#prototype">Prototype</a></li>
+<li><a href="#components">Components</a></li>
+<li><a href="#team">Team</a></li>
+</ul>
+</nav>
+
+<section class="hero" id="home">
+<div class="hero-content">
+<div class="college">NUTAN MAHARASHTRA INSTITUTE OF ENGINEERING &amp; TECHNOLOGY</div>
+<div class="department">TALEGAON DABHADE, PUNE &nbsp; | &nbsp; DEPARTMENT OF CSE (AI)</div>
+<div class="tag">DETECT • ALERT • PROTECT</div>
+<h1>Smart Electric<br><span>Fault Detection System</span></h1>
+<p class="subtitle">An Arduino-based system that monitors voltage and current, detects abnormal electrical conditions and provides instant alerts and load protection.</p>
+<a href="#about" class="btn">Explore Project →</a>
+</div>
+</section>
+
+<section id="about">
+<h2 class="section-title">About <span>Project</span></h2>
+<div class="about">
+<div class="card">
+<h3>What is the project?</h3>
+<p>Smart Electric Fault Detection System is an Arduino-based project designed to monitor electrical parameters such as voltage and current.</p>
+<p style="margin-top:15px;">When an abnormal condition is detected, the system provides an alert using LEDs and a buzzer and can control the connected load through a relay.</p>
+</div>
+<div class="card">
+<h3>Project Objectives</h3>
+<p>• Monitor voltage and current<br><br>• Detect abnormal electrical conditions<br><br>• Display system status on LCD<br><br>• Alert the user during faults<br><br>• Control the connected load using relay</p>
+</div>
+</div>
+</section>
+
+<section>
+<h2 class="section-title">Key <span>Features</span></h2>
+<div class="features">
+<div class="feature"><div class="icon">⚡</div><h3>Real-Time Monitoring</h3><p>Monitors voltage and current continuously.</p></div>
+<div class="feature"><div class="icon">🔔</div><h3>Fault Alerts</h3><p>LEDs and buzzer provide immediate fault indication.</p></div>
+<div class="feature"><div class="icon">🔌</div><h3>Load Control</h3><p>Relay can control the connected load during a fault.</p></div>
+<div class="feature"><div class="icon">📟</div><h3>LCD Display</h3><p>Displays voltage, current and system status.</p></div>
+<div class="feature"><div class="icon">🛡️</div><h3>Electrical Protection</h3><p>Helps identify abnormal electrical conditions quickly.</p></div>
+<div class="feature"><div class="icon">🔧</div><h3>Arduino Based</h3><p>Arduino UNO acts as the main control unit.</p></div>
+</div>
+</section>
+
+<section id="working">
+<h2 class="section-title">How It <span>Works</span></h2>
+<div class="steps">
+<div class="step"><div class="step-number">01</div><h3>Sensing</h3><p>Voltage and current sensors obtain electrical measurements from the circuit.</p></div>
+<div class="step"><div class="step-number">02</div><h3>Processing</h3><p>Arduino UNO receives and processes the sensor values.</p></div>
+<div class="step"><div class="step-number">03</div><h3>Fault Detection</h3><p>The system checks whether the measured values are within the defined limits.</p></div>
+<div class="step"><div class="step-number">04</div><h3>Alert &amp; Protection</h3><p>LED, buzzer and relay provide fault indication and load control.</p></div>
+</div>
+</section>
+
+<section id="circuit" class="circuit">
+<h2 class="section-title">Circuit <span>Connection Diagram</span></h2>
+<div class="circuit-box">
+<img src="circuit-diagram.png" alt="Smart Electric Fault Detection Circuit Diagram">
+<p class="diagram-note">Arduino UNO receives sensor inputs and controls the LCD, LEDs, buzzer and relay according to the detected electrical condition.</p>
+</div>
+</section>
+
+<section id="prototype">
+<h2 class="section-title">Working <span>Prototype</span></h2>
+<div class="prototype-box">
+<div class="prototype-image">
+<img src="project-photo.jpg" alt="Smart Electric Fault Detection Working Prototype">
+</div>
+<div class="prototype-info">
+<h3>Our Working Prototype</h3>
+<p>The developed prototype demonstrates the working of the Smart Electric Fault Detection System using Arduino UNO, voltage and current sensing, LCD display, LED indicators, buzzer and relay-based load control.</p>
+<div class="prototype-points">
+<div>⚡ Voltage Monitoring</div>
+<div>〽 Current Monitoring</div>
+<div>📟 LCD Status Display</div>
+<div>🔔 Fault Alert</div>
+<div>🔌 Relay Load Control</div>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<h2 class="section-title">Fault <span>Detection</span></h2>
+<div class="faults">
+<div class="fault over"><h3>⚡ Over Voltage</h3><p>Voltage above the defined safe limit.</p></div>
+<div class="fault low"><h3>⚠ Low Voltage</h3><p>Voltage below the defined safe limit.</p></div>
+<div class="fault current"><h3>〽 Over Current</h3><p>Current exceeds the defined limit.</p></div>
+</div>
+</section>
+
+<section id="components">
+<h2 class="section-title">Components <span>Used</span></h2>
+<div class="table-container">
+<table>
+<tr><th>Sr. No.</th><th>Component</th></tr>
+<tr><td>1</td><td>Arduino UNO</td></tr>
+<tr><td>2</td><td>Voltage Sensor Module</td></tr>
+<tr><td>3</td><td>ACS712 Current Sensor</td></tr>
+<tr><td>4</td><td>16×2 LCD Display</td></tr>
+<tr><td>5</td><td>5V Relay Module</td></tr>
+<tr><td>6</td><td>Buzzer</td></tr>
+<tr><td>7</td><td>Red LED</td></tr>
+<tr><td>8</td><td>Green LED</td></tr>
+</table>
+</div>
+</section>
+
+<section id="applications">
+<h2 class="section-title"><span>Applications</span></h2>
+<div class="applications">
+<div class="application"><h3>🏠 Home Electrical Systems</h3><p>Monitoring and protection of electrical loads.</p></div>
+<div class="application"><h3>🏭 Industrial Systems</h3><p>Helps monitor electrical equipment and loads.</p></div>
+<div class="application"><h3>⚡ Electrical Safety</h3><p>Provides early indication of abnormal electrical conditions.</p></div>
+</div>
+</section>
+
+<section id="team" class="team-section">
+<div class="team-container">
+<h2 class="section-title">Project <span>Team</span></h2>
+<div class="team-title">Team Members</div>
+<div class="members">
+<div class="member"><div class="member-icon">👨‍💻</div><h4>Pratik Thorat</h4><span class="role">PROGRAMMING &amp; COORDINATION</span><p>Arduino programming, system development and project coordination.</p></div>
+<div class="member"><div class="member-icon">🔧</div><h4>Pushkar Gaikwad</h4><span class="role">HARDWARE INTEGRATION</span><p>Hardware integration, circuit connections and prototype assembly.</p></div>
+<div class="member"><div class="member-icon">⚙️</div><h4>Nikhil Giri</h4><span class="role">SENSORS &amp; TESTING</span><p>Sensor integration, hardware testing and troubleshooting.</p></div>
+<div class="member"><div class="member-icon">📘</div><h4>Pranav Kulkarni</h4><span class="role">RESEARCH &amp; DOCUMENTATION</span><p>Technical research, project analysis and documentation.</p></div>
+<div class="member"><div class="member-icon">🧪</div><h4>Ritesh Thengil</h4><span class="role">CIRCUIT &amp; TESTING</span><p>Circuit design support, prototype testing and documentation.</p></div>
+</div>
+
+<div class="guide">
+<div class="guide-label">PROJECT GUIDE</div>
+<h3>Prof. Swati Narule</h3>
+</div>
+</div>
+</section>
+
+<div class="college-info">
+<h3>Nutan Maharashtra Institute of Engineering &amp; Technology</h3>
+<p>Talegaon Dabhade, Pune</p>
+<p class="branch">Department of CSE (AI)</p>
+</div>
+
+<footer>
+<p>⚡ <span class="highlight">Smart Electric Fault Detection System</span></p>
+<p>DETECT • ALERT • PROTECT</p>
+<p>Engineering Project | NMIET</p>
+</footer>
+
+</body>
+</html>
